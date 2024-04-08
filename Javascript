@@ -1,0 +1,5 @@
+// scripts.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Example: Display a welcome message
+    alert('Welcome to Natural Bed Bug Solutions!');
+});
