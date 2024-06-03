@@ -1,5 +1,70 @@
-// scripts.js
-document.addEventListener('DOMContentLoaded', function() {
-    // Example: Display a welcome message
-    alert('Welcome to Natural Bed Bug Solutions!');
-});
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Open Marketplace</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#marketplace">Marketplace</a></li>
+                <li><a href="#trending">Trending</a></li>
+                <li><a href="#login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="home">
+            <h2>Welcome to Open Marketplace</h2>
+            <p>Buy and sell anything for free. Only 5% commission on sales.</p>
+        </section>
+        
+        <section id="marketplace">
+            <h2>Marketplace</h2>
+            <!-- Items for sale will be displayed here -->
+            <div id="items"></div>
+        </section>
+        
+        <section id="trending">
+            <h2>Trending Items</h2>
+            <div id="trending-items"></div>
+        </section>
+        
+        <section id="login">
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Login</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Open Marketplace</p>
+    </footer>
+
+    <div id="bot">
+        <div id="bot-header">
+            <h3>Assistant Bot</h3>
+            <button id="bot-close">X</button>
+        </div>
+        <div id="bot-content">
+            <p>Hello! Ask me about trending items, popular products, and price estimates.</p>
+        </div>
+        <input type="text" id="bot-input" placeholder="Type a question...">
+        <button id="bot-send">Send</button>
+    </div>
+</body>
+</html>
