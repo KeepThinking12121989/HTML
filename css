@@ -1,33 +1,86 @@
-/* styles.css */
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
     background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
 }
 
-header, footer {
-    background-color: #009578;
-    color: #ffffff;
+header {
+    background: #333;
+    color: #fff;
+    padding: 1em 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 1em;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 1em;
+}
+
+section {
+    margin: 2em 0;
+}
+
+footer {
+    background: #333;
+    color: #fff;
     text-align: center;
     padding: 1em 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
-h1, h2 {
-    color: #333;
+#bot {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 300px;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
 }
 
-article {
-    background-color: #ffffff;
-    margin: 20px;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.affiliate-ad {
-    background-color: #ffecd1;
+#bot-header {
+    background: #333;
+    color: #fff;
     padding: 10px;
-    margin: 20px 0;
-    text-align: center;
-    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#bot-content {
+    padding: 10px;
+    height: 200px;
+    overflow-y: auto;
+}
+
+#bot-input {
+    width: calc(100% - 50px);
+    padding: 10px;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+#bot-send {
+    padding: 10px;
+    background: #333;
+    color: #fff;
+    border: none;
 }
