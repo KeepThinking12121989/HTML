@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open Marketplace</title>
+    <title>Price Estimator</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Open Marketplace</h1>
+        <h1>Price Estimator</h1>
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#marketplace">Marketplace</a></li>
-                <li><a href="#trending">Trending</a></li>
+                <li><a href="#estimate">Estimate</a></li>
                 <li><a href="#login">Login</a></li>
             </ul>
         </nav>
@@ -22,19 +22,24 @@
     
     <main>
         <section id="home">
-            <h2>Welcome to Open Marketplace</h2>
-            <p>Buy and sell anything for free. Only 5% commission on sales.</p>
+            <h2>Welcome to Price Estimator</h2>
+            <p>Get price estimates for any item, including websites and domains. Free for up to 5 queries. 50 cents per query after that.</p>
         </section>
         
-        <section id="marketplace">
-            <h2>Marketplace</h2>
-            <!-- Items for sale will be displayed here -->
-            <div id="items"></div>
-        </section>
-        
-        <section id="trending">
-            <h2>Trending Items</h2>
-            <div id="trending-items"></div>
+        <section id="estimate">
+            <h2>Estimate Item Price</h2>
+            <form id="estimate-form">
+                <label for="item-type">Select Type:</label>
+                <select id="item-type" name="item-type">
+                    <option value="general">General Item</option>
+                    <option value="website">Website/Domain</option>
+                </select>
+                <label for="item">Item:</label>
+                <input type="text" id="item" name="item" required>
+                <button type="submit">Get Estimate</button>
+            </form>
+            <div id="estimate-result"></div>
+            <div id="paypal-button-container" style="display: none;"></div>
         </section>
         
         <section id="login">
@@ -52,7 +57,7 @@
     </main>
     
     <footer>
-        <p>&copy; 2024 Open Marketplace</p>
+        <p>&copy; 2024 Price Estimator</p>
     </footer>
 
     <div id="bot">
@@ -61,9 +66,9 @@
             <button id="bot-close">X</button>
         </div>
         <div id="bot-content">
-            <p>Hello! Ask me about trending items, popular products, and price estimates.</p>
+            <p>Hello! Type in an item or website/domain to get price estimates.</p>
         </div>
-        <input type="text" id="bot-input" placeholder="Type a question...">
+        <input type="text" id="bot-input" placeholder="Type an item or website/domain...">
         <button id="bot-send">Send</button>
     </div>
 </body>
