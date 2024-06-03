@@ -3,27 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Natural Bed Bug Solutions</title>
+    <title>Open Marketplace</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Natural Bed Bug Solutions</h1>
+        <h1>Open Marketplace</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#marketplace">Marketplace</a></li>
+                <li><a href="#trending">Trending</a></li>
+                <li><a href="#login">Login</a></li>
+            </ul>
+        </nav>
     </header>
+    
     <main>
-        <article>
-            <h2>Combat Bed Bugs Naturally with Diatomaceous Earth</h2>
-            <p>Introduction to the natural effectiveness of Diatomaceous Earth against bed bugs...</p>
-            <!-- More paragraphs with in-depth information -->
-        </article>
-        <!-- Affiliate Ad placeholders -->
-        <aside class="affiliate-ad">Ad 1 - Affiliate Link Here</aside>
-        <aside class="affiliate-ad">Ad 2 - Affiliate Link Here</aside>
-        <!-- More ads as needed -->
+        <section id="home">
+            <h2>Welcome to Open Marketplace</h2>
+            <p>Buy and sell anything for free. Only 5% commission on sales.</p>
+        </section>
+        
+        <section id="marketplace">
+            <h2>Marketplace</h2>
+            <!-- Items for sale will be displayed here -->
+            <div id="items"></div>
+        </section>
+        
+        <section id="trending">
+            <h2>Trending Items</h2>
+            <div id="trending-items"></div>
+        </section>
+        
+        <section id="login">
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Login</button>
+            </form>
+        </section>
     </main>
+    
     <footer>
-        <p>© 2024 Natural Solutions Blog</p>
+        <p>&copy; 2024 Open Marketplace</p>
     </footer>
-    <script src="scripts.js"></script>
+
+    <div id="bot">
+        <div id="bot-header">
+            <h3>Assistant Bot</h3>
+            <button id="bot-close">X</button>
+        </div>
+        <div id="bot-content">
+            <p>Hello! Ask me about trending items, popular products, and price estimates.</p>
+        </div>
+        <input type="text" id="bot-input" placeholder="Type a question...">
+        <button id="bot-send">Send</button>
+    </div>
 </body>
 </html>
