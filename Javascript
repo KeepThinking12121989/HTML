@@ -1,70 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open Marketplace</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
-</head>
-<body>
-    <header>
-        <h1>Open Marketplace</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#marketplace">Marketplace</a></li>
-                <li><a href="#trending">Trending</a></li>
-                <li><a href="#login">Login</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section id="home">
-            <h2>Welcome to Open Marketplace</h2>
-            <p>Buy and sell anything for free. Only 5% commission on sales.</p>
-        </section>
-        
-        <section id="marketplace">
-            <h2>Marketplace</h2>
-            <!-- Items for sale will be displayed here -->
-            <div id="items"></div>
-        </section>
-        
-        <section id="trending">
-            <h2>Trending Items</h2>
-            <div id="trending-items"></div>
-        </section>
-        
-        <section id="login">
-            <h2>Login</h2>
-            <form id="login-form">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-                
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-                
-                <button type="submit">Login</button>
-            </form>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2024 Open Marketplace</p>
-    </footer>
+document.addEventListener('DOMContentLoaded', () => {
+    let queryCount = 0;
+    const maxFreeQueries = 5;
+    const queryCost = 0.50;
 
-    <div id="bot">
-        <div id="bot-header">
-            <h3>Assistant Bot</h3>
-            <button id="bot-close">X</button>
-        </div>
-        <div id="bot-content">
-            <p>Hello! Ask me about trending items, popular products, and price estimates.</p>
-        </div>
-        <input type="text" id="bot-input" placeholder="Type a question...">
-        <button id="bot-send">Send</button>
-    </div>
-</body>
-</html>
+    const bot = document.getElementById('bot');
+    const botClose = document.getElementById('bot-close');
+    const botInput = document.getElementById('bot-input');
+    const botSend = document.getElementById('bot-send');
+    const botContent = document.getElementById('bot-content');
+    const estimateForm = document.getElementById('estimate-form');
+    const estimateResult = document.getElementById('estimate-result');
+    const paypalButtonContainer = document.getElementById('paypal-button-container');
+
+    bot.style.display = 'block';
+
+    botClose.addEventListener('click', () => {
+        bot.style.display = 'none';
+    });
+
+    botSend.addEventListener('click', () => {
+        const question = botInput.value;
+        botInput.value = '';
+        const userMessage = document.createElement('p');
+        userMessage.textContent = `You: ${question}`;
+        botContent.appendChild(userMessage);
+        botContent.scrollTop = botContent.scrollHeight;
+
+        // Simulate bot response
+        const botMessage = document.createElement('p');
+        botMessage.textContent = `Bot: Here are some price estimates for "${question}".`;
+        botContent.appendChild(botMessage);
+        botContent.scrollTop = botContent.scrollHeight;
+    });
+
+    estimateForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const itemType = document.getElementById('item-type').value;
+        const item = document.getElementById('item').value;
+        if (queryCount < maxFreeQueries) {
+            queryCount++;
+            getEstimate(itemType, item);
+        } else {
+            paypalButtonContainer.style.display = 'block';
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: queryCost
+                            }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        getEstimate(itemType, item);
+                        paypalButtonContainer.style.display = 'none';
+                    });
+                }
+            }).render('#paypal-button-container');
+        }
+    });
+
+    function getEstimate(itemType, item) {
+        estimateResult.textContent = `Fetching price estimates for "${item}"...`;
+
+        fetch('/estimate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ itemType, item })
+        })
+        .then(response => response.json())
+        .then(data => {
+            estimateResult.innerHTML = `
+                <p>Low: $${data.low}</p>
+                <p>Average: $${data.average}</p>
+                <p>High: $${data.high}</p>
+            `;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            estimateResult.textContent = 'Error fetching price estimates. Please try again later.';
+        });
+    }
+});ź
